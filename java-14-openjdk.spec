@@ -26,8 +26,8 @@
 %define oldmajor %(echo $((%{major}-1)))
 
 Name:		java-14-openjdk
-Version:	14.0.0
-Release:	3
+Version:	14.0.2
+Release:	1
 Summary:	Java Runtime Environment (JRE) %{major}
 Group:		Development/Languages
 License:	GPLv2, ASL 1.1, ASL 2.0, LGPLv2.1
@@ -35,7 +35,7 @@ URL:		http://openjdk.java.net/
 # Source must be packages from upstream's hg repositories using the
 # update_package.sh script
 # PROJECT_NAME=jdk-updates REPO_NAME=jdk14u VERSION=jdk-14+36 ./generate_source_tarball.sh
-Source0:	jdk-jdk%{major}-jdk-%{major}-ga.tar.zst
+Source0:	jdk-updates-jdk%{major}u-jdk-%{version}-ga.tar.zst
 # Extra tests
 Source50:	TestCryptoLevel.java
 Source51:	TestECDSA.java
@@ -48,8 +48,6 @@ Patch2:		https://src.fedoraproject.org/rpms/java-openjdk/raw/master/f/rh1648644-
 Patch3:		https://src.fedoraproject.org/rpms/java-openjdk/raw/master/f/rh649512-remove_uses_of_far_in_jpeg_libjpeg_turbo_1_4_compat_for_jdk10_and_up.patch
 Patch4:		https://src.fedoraproject.org/rpms/java-openjdk/raw/master/f/pr3183-rh1340845-support_fedora_rhel_system_crypto_policy.patch
 Patch5:		https://src.fedoraproject.org/rpms/java-openjdk/raw/master/f/pr1983-rh1565658-support_using_the_system_installation_of_nss_with_the_sunec_provider_jdk11.patch
-# Patches from upstream
-Patch100:	https://github.com/openjdk/panama-foreign/commit/af5c725b.patch
 # Patches from OpenMandriva
 Patch1002:	java-12-compile.patch
 #Patch1003:	java-12-buildfix.patch
