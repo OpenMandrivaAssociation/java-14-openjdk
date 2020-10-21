@@ -1,6 +1,6 @@
 # Use gcc instead of clang
 %bcond_without gcc
-%bcond_without system_jdk
+%bcond_with system_jdk
 # Without bootstrap, the package BuildRequires
 # rpm-javamacros (which in turn requires this package)
 # so jmod(*) and java(*) Provides: can be generated correctly.
@@ -47,15 +47,12 @@ Patch1:		https://src.fedoraproject.org/rpms/java-openjdk/raw/master/f/rh1648242-
 Patch2:		https://src.fedoraproject.org/rpms/java-openjdk/raw/master/f/rh1648644-java_access_bridge_privileged_security.patch
 Patch3:		https://src.fedoraproject.org/rpms/java-openjdk/raw/master/f/rh649512-remove_uses_of_far_in_jpeg_libjpeg_turbo_1_4_compat_for_jdk10_and_up.patch
 Patch4:		https://src.fedoraproject.org/rpms/java-openjdk/raw/master/f/pr3183-rh1340845-support_fedora_rhel_system_crypto_policy.patch
-Patch5:		https://src.fedoraproject.org/rpms/java-openjdk/raw/master/f/pr1983-rh1565658-support_using_the_system_installation_of_nss_with_the_sunec_provider_jdk11.patch
 # Patches from OpenMandriva
 Patch1002:	java-12-compile.patch
-#Patch1003:	java-12-buildfix.patch
+Patch1003:	openjdk-15-nss-3.57.patch
 Patch1004:	openjdk-12-system-harfbuzz.patch
 #Patch1005:	openjdk-13-fix-build.patch
-Patch1006:	java-13-system-nss.patch
 Patch1007:	openjdk-14-gcc10.patch
-Patch1008:	openjdk-14-system-nss-3.51.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	binutils
@@ -242,7 +239,6 @@ if ! bash ../configure \
 	--with-debug-level=release \
 	--with-native-debug-symbols=external \
 	--enable-unlimited-crypto \
-	--enable-system-nss \
 	--with-freetype=system \
 	--with-zlib=system \
 	--with-giflib=system \
@@ -582,6 +578,7 @@ chmod +x %{buildroot}%{_sysconfdir}/profile.d/*.*sh
 %{_jvmdir}/java-%{major}-openjdk/lib/src.zip
 
 %files debug
+%{_jvmdir}/java-%{major}-openjdk/bin/*.debuginfo
 %{_jvmdir}/java-%{major}-openjdk/lib/*.debuginfo
 
 %modpackage java.compiler
